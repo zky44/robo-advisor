@@ -3,9 +3,12 @@
 import csv
 import json
 import os
+from dotenv import load_dotenv
 
 import requests
 import datetime
+
+load_dotenv()
 
 date = datetime.date.today()
 time = datetime.datetime.now()
@@ -16,7 +19,10 @@ def to_usd(my_price):
 
 # INFO INPUTS
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+symbol = "MSFT"
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
+
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 response = requests.get(request_url)
 
 
