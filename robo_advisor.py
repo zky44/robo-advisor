@@ -26,9 +26,23 @@ tsd = parsed_response["Time Series (Daily)"]
 # assuming first day is on top of list
 dates = list(tsd.keys())
 
-latest_day = dates[0]
+date = dates[0]
 
-latest_close = tsd[latest_day]["4.close"]
+latest_close = tsd[date]["4. close"]
+
+high_prices = []
+low_prices = []
+
+
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    low_price = tsd[date]["3. low"]
+    high_prices.append(float((high_price))
+    low_prices.append(float((low_price))
+
+#max of all prices
+recent_high = max(high_prices)
+recent_low = min(low_prices)
 
 #breakpoint()
 
@@ -42,7 +56,7 @@ print(f"REQUEST AT: {date_time}") #need to fix this
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
-print("RECENT HIGH: $101,000.00")
+print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print("RECENT LOW: $99,000.00")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
