@@ -6,6 +6,7 @@ Thanks for checking out this awesome robo-advisor! Read the steps below to learn
 
 + Anaconda 3.7+
 + Python 3.7+
++ Pip
 
 ## Installation
 
