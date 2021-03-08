@@ -6,13 +6,16 @@ import os
 from dotenv import load_dotenv
 
 import requests
-import datetime
+from datetime import datetime
 
 load_dotenv()
 
-date = datetime.date.today()
-time = datetime.datetime.now()
-date_time = date, time.strftime("%I:%M:%S %p")
+now = datetime.now()
+print(now.strftime('%Y/%m/%d %I:%M:%S'))
+
+#date = datetime.date.today()
+#time = datetime.datetime.now()
+#date_time = date, time.strftime("%I:%M:%S %p")
 
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
@@ -38,6 +41,7 @@ dates = list(tsd.keys())
 date = dates[0]
 
 latest_close = tsd[date]["4. close"]
+latest_day = tsd[date]
 
 high_prices = []
 low_prices = []
@@ -81,9 +85,9 @@ print("-------------------------")
 print(f"SELECTED SYMBOL: {symbol}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print(f"REQUEST AT: {date_time}") #need to fix this
+print(f"REQUEST AT: {dates}") #need to fix this
 print("-------------------------")
-print(f"LATEST DAY: {last_refreshed}")
+print(f"LATEST DAY: {dates[0]}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
