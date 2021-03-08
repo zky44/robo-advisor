@@ -11,7 +11,8 @@ from datetime import datetime
 load_dotenv()
 
 now = datetime.now()
-print(now.strftime('%Y/%m/%d %I:%M:%S'))
+print(now.strftime('%Y/%m/%d %I:%M:%S%p'))
+request_time = now.strftime('%Y/%m/%d %I:%M:%S%p')
 
 #date = datetime.date.today()
 #time = datetime.datetime.now()
@@ -85,7 +86,7 @@ print("-------------------------")
 print(f"SELECTED SYMBOL: {symbol}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print(f"REQUEST AT: {dates}") #need to fix this
+print(f"REQUEST AT: {request_time}") #need to fix this
 print("-------------------------")
 print(f"LATEST DAY: {dates[0]}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
