@@ -1,33 +1,27 @@
-# this is the "app/robo_advisor.py" file
-
+# import and load modules
 import csv
 import json
 import os
 from dotenv import load_dotenv
-
-
 import requests
 from datetime import datetime
 import validators
-
-
 load_dotenv()
 
+#date/time
 now = datetime.now()
-#print(now.strftime('%Y/%m/%d %I:%M:%S%p'))
 request_time = now.strftime('%Y/%m/%d %I:%M:%S%p')
 
+#convert prices to USD
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
 
 # INFO INPUTS
-
 user_choice = input("Please input a stock symbol: ")
 user_choice = user_choice.upper()
 
-#print(user_choice.isdigit())
+#PRELIMINARY DATA VALIDATION
 
-#preliminary data validation
 #Step 1 - test that user input is not too long
 if len(user_choice) < 7:
     pass
@@ -48,9 +42,11 @@ else:
     exit()
 
 
+#info for stock symbol and API_KEY
 symbol = user_choice
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY")
 
+#establish request_url and use json to load info from request_url
 request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 
 response = requests.get(request_url)
@@ -58,8 +54,7 @@ response = requests.get(request_url)
 parsed_response = json.loads(response.text)
 
 
-
-#data validation part 2 - validate that stock symbol exists
+#DATA VALIDATION PART 2 - VALIDATE THAT STOCK SYMBOL EXISTS
 #found an online forum helping explain how to look for a specific value in a dictionary (https://www.educative.io/edpresso/how-to-check-if-a-key-exists-in-a-python-dictionary)
 key_to_lookup = 'Error Message'
 if key_to_lookup in parsed_response:
@@ -75,16 +70,17 @@ tsd = parsed_response["Time Series (Daily)"]
 
 # assuming first day is on top of list
 dates = list(tsd.keys())
-
 date = dates[0]
 
+#latest close and latest day
 latest_close = tsd[date]["4. close"]
 latest_day = tsd[date]
 
+#preliminary list for high and low prices that will be appeneded
 high_prices = []
 low_prices = []
 
-
+#establish high and low price
 for date in dates:
     high_price = tsd[date]["2. high"]
     low_price = tsd[date]["3. low"]
@@ -96,11 +92,8 @@ recent_high = max(high_prices)
 recent_low = min(low_prices)
 
 
-
-# csv-mgmt/write_teams.py
-
+#write historical prices to CSV file
 csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
-#os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
 csv_headers = fieldnames=["timestamp", "open", "high", "low", "close", "volume"]
 
 with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
@@ -118,7 +111,7 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
     })
  
 
-
+#calculations for recommendation, with explanations below
 if float(latest_close) <= 1.2 * recent_low:
     recommendation = "BUY"
 elif float(latest_close) <= 1.7 * recent_low:
@@ -136,6 +129,7 @@ if recommendation == "SELL":
     recommendation_reason = "The stock's latest closing price is more than 70% above its recent low. Therefore, it could be too expensive."
 
 
+#dynamic coding into user output
 print("-------------------------")
 print(f"SELECTED SYMBOL: {symbol}")
 print("-------------------------")
