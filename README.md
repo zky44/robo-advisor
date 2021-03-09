@@ -1,6 +1,6 @@
 # robo-advisor application
 
-Thanks for checking out this awesome robo-advisor! Read the steps below to learn how to set up your local environment so that you can use it to get stock trading recommendations.
+Thanks for checking out this awesome robo-advisor! Read the steps below to learn how to set up your local environment so that you can use it to get stock trading data and recommendations.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 ## Getting Your Custom API Key
 
-Visit [Alpha Vantage](https://www.alphavantage.co/) to retreive your custom API Key. Click "GET YOUR FREE API KEY TODAY" and fill in your information. Once you get your key, you'll want to store the API Key value in an [environment variable](https://app.sendgrid.com/settings/api_keys) called `ALPHAVANTAGE_API_KEY`
+Visit [Alpha Vantage](https://www.alphavantage.co/) to retreive your custom API Key. Click "GET YOUR FREE API KEY TODAY" and fill in your information. Once you get your key, you'll want to store the API Key value in an [environment variable](https://github.com/zky44/intro-to-python/blob/master/notes/environment-variables.md) called `ALPHAVANTAGE_API_KEY`
 
 ```sh
 
@@ -58,4 +58,6 @@ You will also be presented with a "BUY", "HOLD", or "SELL" recommendation and ra
 
 + "BUY" - The stock's latest closing price is less than 20% above its recent low. It may have just sold-off and would be a good time to get back in!
 + "HOLD" - The stock's latest closing price is more than 20% above its recent low but less than 70% above its recent low. It is best to stay neutral!
-+ "SELL" - The stock's latest closing price is more than 70% above its recent low. It may have spiked in the past 100 days and is overvalued!
++ "SELL" - The stock's latest closing price is more than 70% above its recent low. It may have spiked in the past 100 days and could be overvalued!
+
+Finally, the system will also write all historical stock prices of the past 100 days to the "prices.csv" file located in the repository's "data" directory, which you can access using the file path shown.
