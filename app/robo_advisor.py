@@ -119,10 +119,26 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
  
 
 
+if float(latest_close) <= 1.2 * recent_low:
+    recommendation = "BUY"
+elif float(latest_close) <= 1.7 * recent_low:
+    recommendation = "HOLD"
+else:
+    recommendation = "SELL"
+
+if recommendation == "BUY":
+    recommendation_reason = "The stock's latest closing price is less than 20% above its recent low. Therefore, it could be selling at an attractive price."
+
+if recommendation == "HOLD":
+    recommendation_reason = "The stock's latest closing price is more than 20% above its recent low but less than 70% above its recent low. Therefore, we recommend holding on for now."
+
+if recommendation == "SELL":
+    recommendation_reason = "The stock's latest closing price is more than 70% above its recent low. Therefore, it could be too expensive."
+
+
 print("-------------------------")
 print(f"SELECTED SYMBOL: {symbol}")
 print("-------------------------")
-print("REQUESTING STOCK MARKET DATA...")
 print(f"REQUEST AT: {request_time}")
 print("-------------------------")
 print(f"LATEST DAY: {dates[0]}")
@@ -130,8 +146,8 @@ print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
+print(f"RECOMMENDATION: {recommendation}")
+print(f"RECOMMENDATION REASON: {recommendation_reason}")
 print("-------------------------")
 print(f"RECOMMENDATION REASON: {csv_file_path}")
 print("-------------------------")
