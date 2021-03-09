@@ -60,4 +60,4 @@ You will also be presented with a "BUY", "HOLD", or "SELL" recommendation and ra
 + "HOLD" - The stock's latest closing price is more than 20% above its recent low but less than 70% above its recent low. It is best to stay neutral!
 + "SELL" - The stock's latest closing price is more than 70% above its recent low. It may have spiked in the past 100 days and could be overvalued!
 
-Finally, the system will also write all historical stock prices of the past 100 days to the "prices.csv" file located in the repository's "data" directory, which you can access using the file path shown.
+Finally, the system will write all historical stock prices of the past 100 days to the "prices.csv" file located in the repository's "data" directory, which you can access using the file path shown.
