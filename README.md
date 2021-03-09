@@ -33,6 +33,17 @@ pip install -r requirements.txt
 
 > NOTE: if this command throws you an error, make sure you are running it from the repository's root directory where the requirements.txt file exists. Refer back to the initial `cd` step above
 
+## Getting Your Custom API Key
+
+Visit [Alpha Vantage](https://www.alphavantage.co/) to retreive your custom API Key. Click "GET YOUR FREE API KEY TODAY" and fill in your information. Once you get your key, you'll want to store the API Key value in an [environment variable](https://app.sendgrid.com/settings/api_keys) called `ALPHAVANTAGE_API_KEY`
+
+```sh
+
+ALPHAVANTAGE_API_KEY = "abc123"
+```
+
+>IMPORTANT: the ".env" file is usally the place for passing configuration options and secret credentials, so as a best practrice we don't upload this file to version control. Make sure that you add the code in this [.gitignore](/.gitignore) file, most importantly line 2, to your ".gitignore" file.
+
 ## Using the Robo-Advisor
 
 From inside the virtual environment, run the code using the command below:
