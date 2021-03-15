@@ -63,3 +63,5 @@ You will also be presented with a "BUY", "HOLD", or "SELL" recommendation and ra
 Finally, the system will write all historical stock prices of the past 100 days to the "prices.csv" file located in the repository's "data" directory, which you can access using the file path shown.
 
 Making a change at the end.
+
+This is another modification.
